@@ -1,0 +1,1 @@
+INSERT INTO hero (name, organization, active) VALUES ('Superman', 'Justice League', true);

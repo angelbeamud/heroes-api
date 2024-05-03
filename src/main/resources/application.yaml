@@ -1,0 +1,12 @@
+spring:
+  application:
+  name: hero
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/heroes"
+    username: "postgres"
+    password: "postgres"
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: true
+    locations: classpath:db/migration
