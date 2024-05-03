@@ -50,6 +50,7 @@ public class HeroController implements HeroApi {
     @Override
     @LogExecutionTime
     public ResponseEntity<Void> deleteHero(Long id) {
+        heroAppPort.deleteHero(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
