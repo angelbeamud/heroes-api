@@ -4,18 +4,14 @@ import com.app.hero.domain.models.HeroDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Validated
 @RequestMapping(value = "heroes")
 public interface HeroApi {
     @Operation(summary = "Find all heroes")
@@ -67,8 +63,8 @@ public interface HeroApi {
             }),
             @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
     })
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<HeroDTO> createHero(@Valid @RequestBody HeroDTO hero);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<HeroDTO> createHero(@RequestBody HeroDTO hero);
 
     @Operation(summary = "Update hero")
     @ApiResponses(value = {
@@ -80,7 +76,7 @@ public interface HeroApi {
             }),
             @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
     })
-    @PutMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<HeroDTO> updateHero(@PathVariable(name = "id") Long id, @RequestBody HeroDTO hero);
 
     @Operation(summary = "Delete hero")
