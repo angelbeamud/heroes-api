@@ -1,8 +1,6 @@
 package com.app.hero.infrastructure.adapters;
 
 import com.app.hero.domain.models.HeroDTO;
-import com.app.hero.domain.ports.infra.HeroDBPort;
-import com.app.hero.domain.services.HeroService;
 import com.app.hero.infrastructure.mappers.HeroDBMapper;
 import com.app.hero.infrastructure.repositories.HeroRepository;
 import com.app.hero.utils.HeroFaker;

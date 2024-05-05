@@ -6,6 +6,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +28,7 @@ public interface HeroApi {
             @ApiResponse(responseCode = "404", description = "Heroes not found", content = @Content)
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<HeroDTO>> findAllHeroes();
+    ResponseEntity<Page<HeroDTO>> findAllHeroes(@PageableDefault Pageable pageable);
 
     @Operation(summary = "Find hero by id")
     @ApiResponses(value = {
@@ -51,7 +54,7 @@ public interface HeroApi {
             @ApiResponse(responseCode = "404", description = "Heroes not found", content = @Content)
     })
     @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<HeroDTO>> findHeroesByQueryParam(@RequestParam(name = "name") String name);
+    ResponseEntity<Page<HeroDTO>> findHeroesByQueryParam(@RequestParam(name = "name", required = false) String name, @PageableDefault Pageable pageable);
 
     @Operation(summary = "Create hero")
     @ApiResponses(value = {

@@ -5,6 +5,8 @@ import com.app.hero.application.annotation.LogExecutionTime;
 import com.app.hero.domain.models.HeroDTO;
 import com.app.hero.domain.ports.app.HeroAppPort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +21,8 @@ public class HeroController implements HeroApi {
 
     @Override
     @LogExecutionTime
-    public ResponseEntity<List<HeroDTO>> findAllHeroes() {
-        return ResponseEntity.ok(heroAppPort.findAllHeroes());
+    public ResponseEntity<Page<HeroDTO>> findAllHeroes(Pageable pageable) {
+        return ResponseEntity.ok(heroAppPort.findAllHeroes(pageable));
     }
 
     @Override
@@ -31,8 +33,8 @@ public class HeroController implements HeroApi {
 
     @Override
     @LogExecutionTime
-    public ResponseEntity<List<HeroDTO>> findHeroesByQueryParam(String name) {
-        return ResponseEntity.ok(heroAppPort.findHeroes(name));
+    public ResponseEntity<Page<HeroDTO>> findHeroesByQueryParam(String name, Pageable pageable) {
+        return ResponseEntity.ok(heroAppPort.findHeroes(name, pageable));
     }
 
     @Override

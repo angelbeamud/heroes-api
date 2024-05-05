@@ -4,6 +4,8 @@ import com.app.hero.domain.models.HeroDTO;
 import com.app.hero.domain.ports.app.HeroAppPort;
 import com.app.hero.domain.ports.infra.HeroDBPort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +16,8 @@ public class HeroService implements HeroAppPort {
     private final HeroDBPort heroDBPort;
 
     @Override
-    public List<HeroDTO> findAllHeroes() {
-        return heroDBPort.findAllHeroes();
+    public Page<HeroDTO> findAllHeroes(Pageable pageable) {
+        return heroDBPort.findAllHeroes(pageable);
     }
 
     @Override
@@ -24,8 +26,8 @@ public class HeroService implements HeroAppPort {
     }
 
     @Override
-    public List<HeroDTO> findHeroes(String name) {
-        return heroDBPort.findHeroes(name);
+    public Page<HeroDTO> findHeroes(String name, Pageable pageable) {
+        return heroDBPort.findHeroes(name, pageable);
     }
 
     @Override
